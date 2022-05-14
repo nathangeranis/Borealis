@@ -45,7 +45,8 @@
 
     protected override void OnInitialized()
     {
-        _themeManager.Theme = ThemeUtility.LoadTheme();
+        ThemeOptions options = ThemeUtility.LoadTheme();
+        _themeManager.Theme = options.Theme;
         StateHasChanged();
     }
 }

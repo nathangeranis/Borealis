@@ -1,5 +1,4 @@
 ﻿using Borealis.Web.Utilities.Options.Theme;
-
 using System.Text.Json;
 namespace Borealis.Web.Utilities
 {
@@ -8,13 +7,13 @@ namespace Borealis.Web.Utilities
         public static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions() { WriteIndented = true, MaxDepth = 3 };
         public static string filePath = Path.Combine(AppContext.BaseDirectory, @"Config\Theme\Theme.json");
 
-        public static MudTheme LoadTheme()
+        public static ThemeOptions LoadTheme()
         {
             if (!File.Exists(filePath))
             {
                 string json = JsonSerializer.Serialize(new ThemeOptions(), JsonSerializerOptions);
                 CreateTheme(json, false);
-                return new MudTheme();
+                return new ThemeOptions();
             }
             ThemeOptions themeOptions = JsonSerializer.Deserialize<ThemeOptions>(File.ReadAllText(filePath));
 

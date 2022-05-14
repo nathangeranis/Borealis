@@ -1,8 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-
 namespace Borealis.Web.Utilities.Options.Theme
 {
-    public class ThemeOptions
+    public partial class ThemeOptions
     {
         public bool RTL { get; set; }
         public string FontFamily { get; set; }
@@ -13,7 +12,7 @@ namespace Borealis.Web.Utilities.Options.Theme
         public DrawerClipMode DrawerClipMode { get; set; }
         public PaletteOption Palette { get; set; }
         public PaletteOption PaletteDark { get; set; }
-        //public ShadowOption Shadow { get; set; }
+        public ShadowOption Shadow { get; set; }
         //public TypographyOption Typography { get; set; }
         //public LayoutOption LayoutProperties { get; set; }
         //public ZIndexOption ZIndex { get; set; }
@@ -30,10 +29,7 @@ namespace Borealis.Web.Utilities.Options.Theme
             DrawerClipMode = DrawerClipMode.Docked;
             Palette = new PaletteOption();
             PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
-        }
-        public partial class ShadowOption
-        {
-
+            Shadow = new ShadowOption();
         }
         public partial class TypographyOption
         {

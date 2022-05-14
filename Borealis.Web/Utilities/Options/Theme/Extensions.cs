@@ -1,7 +1,5 @@
 ﻿using MudBlazor.Utilities;
-
 using System.Reflection;
-
 namespace Borealis.Web.Utilities.Options.Theme
 {
     public static class Extensions
@@ -27,13 +25,16 @@ namespace Borealis.Web.Utilities.Options.Theme
             }
             return p;
         }
-        public static MudTheme ToMudTheme(this ThemeOptions themeOpts)
+        public static ThemeOptions ToMudTheme(this ThemeOptions themeOpts)
         {
             MudTheme theme = new MudTheme
             { 
-                Palette = themeOpts.Palette.FromPaletteOption() 
+                Palette = themeOpts.Palette.FromPaletteOption(),
+                PaletteDark = themeOpts.PaletteDark.FromPaletteOption(),
+
             };
-            return theme;
+            themeOpts.Theme = theme;
+            return themeOpts;
         }
     }
 }
