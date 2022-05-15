@@ -1,21 +1,19 @@
 ﻿@inherits LayoutComponentBase
-<MudThemeProvider Theme="_themeManager.Theme" />
+<MudThemeProvider Theme="_theme.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="_themeManager.AppBarElevation">
+    <MudAppBar Elevation="_theme.AppBarElevation" Fixed="true" Dense="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+        <MudText Typo="Typo.h5"Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
+        <MudSpacer />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation">
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="_theme.DrawerClipMode" Elevation="_theme.DrawerElevation">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h5" Class="mt-1">Application</MudText>
         </MudDrawerHeader>
     </MudDrawer>
-    <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-    <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
     <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
     </MudDrawer>
     <MudMainContent>
@@ -23,30 +21,14 @@
     </MudMainContent>
 </MudLayout>
 @code {
-    private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
-    public bool _themeManagerOpen = false;
-    bool _drawerOpen = true;
-
+    ThemeOptions _theme;
+    bool _drawerOpen = false;
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
-    void OpenThemeManager(bool value)
-    {
-        _themeManagerOpen = value;
-    }
-
-    void UpdateTheme(ThemeManagerTheme value)
-    {
-        _themeManager = value;
-        ThemeUtility.CreateOrUpdateTheme(_themeManager.Theme);
-        StateHasChanged();
-    }
-
     protected override void OnInitialized()
     {
-        ThemeOptions options = ThemeUtility.LoadTheme();
-        _themeManager.Theme = options.Theme;
-        StateHasChanged();
+        _theme = ThemeUtility.LoadTheme();
     }
 }

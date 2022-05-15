@@ -12,7 +12,7 @@ namespace Borealis.Web.Utilities
             if (!File.Exists(filePath))
             {
                 string json = JsonSerializer.Serialize(new ThemeOptions(), JsonSerializerOptions);
-                CreateTheme(json, false);
+                CreateTheme(json);
                 return new ThemeOptions();
             }
             ThemeOptions themeOptions = JsonSerializer.Deserialize<ThemeOptions>(File.ReadAllText(filePath));
@@ -21,36 +21,35 @@ namespace Borealis.Web.Utilities
         }
         public static void CreateOrUpdateTheme(MudTheme _theme)
         {
-
-            //try
-            //{
-            //    if (!Directory.Exists(filePath))
-            //        CreateTheme(JsonSerializer.Serialize(_theme, JsonSerializerOptions), false);
-            //    else
-            //    {
-            //        string json = File.ReadAllText(filePath);
-            //        MudTheme theme = JsonSerializer.Deserialize<MudTheme>(json);
-            //        if (theme == null)
-            //            CreateTheme(JsonSerializer.Serialize(_theme, JsonSerializerOptions));
-            //        else
-            //            UpdateTheme(theme, _theme);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine("Error writing app settings");
-            //}
+            try
+            {
+                if (!File.Exists(filePath))
+                    CreateTheme(JsonSerializer.Serialize(_theme.ToThemeOptionsFromMudTheme(), JsonSerializerOptions));
+                else
+                {
+                    string json = File.ReadAllText(filePath);
+                    ThemeOptions theme = JsonSerializer.Deserialize<ThemeOptions>(json);
+                    if (theme == null)
+                        CreateTheme(JsonSerializer.Serialize(_theme.ToThemeOptionsFromMudTheme(), JsonSerializerOptions));
+                    else
+                        UpdateTheme(theme, _theme);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
         }
 
-        private static void UpdateTheme(MudTheme fromFile, MudTheme fromUser)
+        private static void UpdateTheme(ThemeOptions fromFile, MudTheme fromUser)
         {
-            if (!fromUser.Equals(fromFile))
+            if (fromUser.Equals(fromFile.ToMudTheme()))
                 return;
-            CreateTheme(JsonSerializer.Serialize(fromUser, JsonSerializerOptions));
+            CreateTheme(JsonSerializer.Serialize(fromUser.ToThemeOptionsFromMudTheme(), JsonSerializerOptions));
         }
-        private static void CreateTheme(string output, bool directoryExists = true)
+        private static void CreateTheme(string output)
         {
-            if (!directoryExists)
+            if (!Directory.Exists(Path.Combine(AppContext.BaseDirectory, @"Config\Theme")))
                 Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, @"Config\Theme"));
             File.WriteAllText(filePath, output);
         }
