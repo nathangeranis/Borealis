@@ -4,20 +4,18 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="_theme.AppBarElevation" Fixed="true" Dense="true">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+    <MudAppBar Color="Color.Primary" Dense="true" Elevation="2">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
         <MudSpacer />
-        <MudText Typo="Typo.h5"Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
+        <MudText Typo="Typo.h5" Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
         <MudSpacer />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="_theme.DrawerClipMode" Elevation="_theme.DrawerElevation">
-        <MudDrawerHeader>
-        </MudDrawerHeader>
-    </MudDrawer>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation"  ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
     </MudDrawer>
     <MudMainContent>
-        @Body
+        <MudContainer Fixed="true">
+            @Body
+        </MudContainer>
     </MudMainContent>
 </MudLayout>
 @code {
