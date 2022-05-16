@@ -22,7 +22,7 @@ namespace Borealis.Web.Utilities.Options.Theme
             DefaultElevation = 1;
             AppBarElevation = 25;
             DrawerElevation = 2;
-            DrawerClipMode = DrawerClipMode.Docked;
+            DrawerClipMode = DrawerClipMode.Always;
             Palette = new PaletteOption();
             PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
         }
