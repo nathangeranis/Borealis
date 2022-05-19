@@ -1,8 +1,8 @@
 ﻿global using System.Xml;
+global using System.Reflection;
+global using Microsoft.Extensions.Configuration;
 global using Microsoft.AspNetCore.Components.Web;
-global using MudBlazor;
-global using MudBlazor.ThemeManager;
-global using MudBlazor.Services;
+global using Radzen;
 global using Borealis.Web;
 global using Borealis.Web.Utilities;
 

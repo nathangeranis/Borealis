@@ -9,11 +9,11 @@ namespace Borealis.Web.Utilities.Options.Theme
         public int DefaultElevation { get; set; }
         public int AppBarElevation { get; set; }
         public int DrawerElevation { get; set; }
-        public DrawerClipMode DrawerClipMode { get; set; }
+        //public DrawerClipMode DrawerClipMode { get; set; }
         public PaletteOption Palette { get; set; }
-        public PaletteOption PaletteDark { get; set; }
-        [JsonIgnore]
-        public MudTheme? Theme { get; set; }
+        //public PaletteOption PaletteDark { get; set; }
+        //[JsonIgnore]
+        //public MudTheme? Theme { get; set; }
         public ThemeOptions()
         {
             RTL = false;
@@ -22,9 +22,9 @@ namespace Borealis.Web.Utilities.Options.Theme
             DefaultElevation = 1;
             AppBarElevation = 25;
             DrawerElevation = 2;
-            DrawerClipMode = DrawerClipMode.Always;
+            //DrawerClipMode = DrawerClipMode.Always;
             Palette = new PaletteOption();
-            PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
+            //PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
         }
     }
 }
