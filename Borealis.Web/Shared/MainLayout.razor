@@ -1,38 +1,8 @@
 ﻿@inherits LayoutComponentBase
-<RadzenDialog />
-<RadzenNotification />
-<RadzenContextMenu />
-<RadzenTooltip />
-<Layout>
-    <LayoutHeader Fixed="true" Background="Background.Primary">
-@*        <Field ElementId="menu_button">
-            <Check TValue="bool" ElementId="menu_checkbox"></Check>
-            <FieldLabel For="menu_checkbox" ElementId="menu_label">
-                <div id="menu_text_bar"></div>
-            </FieldLabel>
-        </Field>
-*@@*        <div id="menu_button">
-            <input type="checkbox" id="menu_checkbox">
-            <label for="menu_checkbox" id="menu_label">
-            </label>
-        </div>
-*@        <Heading Size="HeadingSize.Is5" TextAlignment="TextAlignment.Center" TextColor="TextColor.White">Borealis</Heading>
-    </LayoutHeader>
-    <Layout Sider="true">
-        <LayoutSider>
-            <LayoutSiderContent>
-                <NavMenu></NavMenu>
-            </LayoutSiderContent>
-        </LayoutSider>
-        <Layout>
-            <LayoutContent>
-                <Container Breakpoint="Breakpoint.Tablet">
-                    @Body
-                </Container>
-            </LayoutContent>
-        </Layout>
-    </Layout>
-</Layout>
+<RadzenDialog/>
+<RadzenNotification/>
+<RadzenContextMenu/>
+<RadzenTooltip/>
 @*<MudThemeProvider Theme="_theme.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
