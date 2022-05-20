@@ -1,5 +1,8 @@
 //var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 //logger.Info("Init Main...");
+
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     ApplicationName = typeof(Program).Assembly.FullName,
@@ -10,10 +13,8 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<DialogService>();
-builder.Services.AddScoped<NotificationService>();
-builder.Services.AddScoped<TooltipService>();
-builder.Services.AddScoped<ContextMenuService>();
+builder.Services.AddMudServices();
+builder.Services.Configure<MudTheme>(builder.Configuration.GetSection(nameof(MudTheme)));
 builder.WebHost.UseIIS();
 //builder.Host.ConfigureLogging(logging =>
 //{

@@ -1,9 +1,5 @@
 ﻿@inherits LayoutComponentBase
-<RadzenDialog/>
-<RadzenNotification/>
-<RadzenContextMenu/>
-<RadzenTooltip/>
-@*<MudThemeProvider Theme="_theme.Theme" />
+<MudThemeProvider Theme="_theme.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudBreakpointProvider>
@@ -14,19 +10,18 @@
             <MudText Typo="Typo.h5" Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
             <MudSpacer />
         </MudAppBar>
-       <MudSwipeArea OnSwipe="@OnSwipe" Style="width:10rem; z-index:50;">
-            <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation" ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" MiniWidth="3.25rem">
+@*        <MudSwipeArea OnSwipe="@OnSwipe" Style="width:10rem; z-index:50;">
+*@            <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation" ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" MiniWidth="3.25rem">
                 <NavMenu></NavMenu>
             </MudDrawer>
-        </MudSwipeArea>
-       <MudMainContent>
+@*        </MudSwipeArea>
+*@        <MudMainContent>
             <MudContainer Fixed="true">
                 @Body
             </MudContainer>
         </MudMainContent>
     </MudLayout>
 </MudBreakpointProvider>
-*@
 @code {
     ThemeOptions _theme;
     bool _drawerOpen = false;
@@ -34,21 +29,21 @@
     {
         _drawerOpen = !_drawerOpen;
     }
-    //public void OnSwipe(SwipeDirection direction)
-    //{
-    //    if (direction == SwipeDirection.LeftToRight && !_drawerOpen)
-    //    {
-    //        _drawerOpen = true;
-    //        StateHasChanged();
-    //    }
-    //    else if (direction == SwipeDirection.RightToLeft && _drawerOpen)
-    //    {
-    //        _drawerOpen = false;
-    //        StateHasChanged();
-    //    }
-    //}
+    public void OnSwipe(SwipeDirection direction)
+    {
+        if (direction == SwipeDirection.LeftToRight && !_drawerOpen)
+        {
+            _drawerOpen = true;
+            StateHasChanged();
+        }
+        else if (direction == SwipeDirection.RightToLeft && _drawerOpen)
+        {
+            _drawerOpen = false;
+            StateHasChanged();
+        }
+    }
     protected override void OnInitialized()
     {
-        //_theme = ThemeUtility.LoadTheme();
+        _theme = ThemeUtility.LoadTheme();
     }
 }

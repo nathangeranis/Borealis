@@ -24,7 +24,7 @@ namespace Borealis.Utilities.Options.Theme
             DrawerElevation = 2;
             DrawerClipMode = DrawerClipMode.Always;
             Palette = new PaletteOption();
-            //PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
+            PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
         }
     }
 }
