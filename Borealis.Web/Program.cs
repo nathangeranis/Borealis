@@ -5,10 +5,15 @@ using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
-    ApplicationName = typeof(Program).Assembly.FullName,
-    //ContentRootPath = Directory.GetCurrentDirectory(),
-    //EnvironmentName = Environments.Production,
-    //WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "Content")
+    Args = args,
+    ApplicationName = typeof(Program).Assembly.GetName().Name,
+    ContentRootPath = Directory.GetCurrentDirectory(),
+#if DEBUG
+    EnvironmentName = Environments.Development,
+#else
+    EnvironmentName = Environments.Production,
+#endif
+    WebRootPath = Directory.GetCurrentDirectory()
 });
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -26,15 +31,12 @@ builder.WebHost.UseIIS();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
+#if DEBUG
+app.UseDeveloperExceptionPage();
+#else 
+app.UseExceptionHandler("/Error");
+app.UseHsts();
+#endif
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 //app.UseStatusCodePagesWithReExecute("/Error/HandleError/{0}/{0}");
