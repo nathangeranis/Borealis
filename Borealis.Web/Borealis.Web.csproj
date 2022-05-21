@@ -6,22 +6,17 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
-		<PackageReference Include="CG.Blazor.Wizard" Version="2022.1.2" />
+		<PackageReference Include="CG.Blazor.Wizard" Version="2022.1.4" />
 		<PackageReference Include="MudBlazor" Version="6.0.10" />
 		<PackageReference Include="MudBlazor.Extensions" Version="1.2.2" />
 		<PackageReference Include="MudBlazor.Markdown" Version="0.0.10" />
-		<PackageReference Include="MudBlazor.ThemeManager" Version="1.0.6" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.14" />
-		<PackageReference Include="NLog" Version="4.7.15" />
-		<PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
+		<PackageReference Include="NLog" Version="5.0.0" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="5.0.0" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Update="Shared\MainLayout.razor">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	  </Content>
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="wwwroot\scripts\" />
+	  <ProjectReference Include="..\Borealis.DataManagement\Borealis.DataManagement.csproj" />
 	</ItemGroup>
 </Project>

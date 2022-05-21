@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32505.426
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Borealis.Web", "Borealis.Web\Borealis.Web.csproj", "{E6F1D71F-4831-4BBA-967C-7C27E9D927C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borealis", "Borealis\Borealis.csproj", "{AC94D191-C7BA-4AB0-9805-059003F5539B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Borealis", "Borealis\Borealis.csproj", "{AC94D191-C7BA-4AB0-9805-059003F5539B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borealis.DataManagement", "Borealis.DataManagement\Borealis.DataManagement.csproj", "{41E20449-CC22-4E21-B70F-19ACBC771516}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{AC94D191-C7BA-4AB0-9805-059003F5539B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC94D191-C7BA-4AB0-9805-059003F5539B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC94D191-C7BA-4AB0-9805-059003F5539B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{41E20449-CC22-4E21-B70F-19ACBC771516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E20449-CC22-4E21-B70F-19ACBC771516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E20449-CC22-4E21-B70F-19ACBC771516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E20449-CC22-4E21-B70F-19ACBC771516}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

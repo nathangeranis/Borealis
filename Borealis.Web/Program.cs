@@ -1,8 +1,6 @@
-//var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-//logger.Info("Init Main...");
-
-using Microsoft.Extensions.Configuration;
-
+var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+logger.Info("Init Main...");
+Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\Student\Documents\Projects\Borealis\Borealis.DataManagement\AppFiles\borealis-7c47e-26fc01c5bd43.json");
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
@@ -21,12 +19,12 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
 builder.Services.Configure<MudTheme>(builder.Configuration.GetSection(nameof(MudTheme)));
 builder.WebHost.UseIIS();
-//builder.Host.ConfigureLogging(logging =>
-//{
-//    logging.ClearProviders();
-//    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-//    logging.AddNLogWeb();
-//}).UseNLog();
+builder.Host.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+    logging.AddNLogWeb();
+}).UseNLog();
 
 
 var app = builder.Build();

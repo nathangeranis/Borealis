@@ -7,17 +7,20 @@ namespace Borealis.Web.Utilities
         public static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions() { WriteIndented = true, MaxDepth = 3 };
         public static string filePath = Path.Combine(AppContext.BaseDirectory, @"Config\Theme\Theme.json");
 
-        public static ThemeOptions LoadTheme()
+        public static async Task<ThemeOptions> LoadTheme()
         {
-            if (!File.Exists(filePath))
+            try
             {
-                string json = JsonSerializer.Serialize(new ThemeOptions(), JsonSerializerOptions);
-                CreateTheme(json);
-                return new ThemeOptions();
+                DataManagement.Firebase firebase = new DataManagement.Firebase();
+                var themeOptions = await firebase.CheckDefaultTheme();
+                ThemeOptions opts = themeOptions as ThemeOptions;
+                return opts.ToMudTheme();
             }
-            ThemeOptions themeOptions = JsonSerializer.Deserialize<ThemeOptions>(File.ReadAllText(filePath));
-
-            return themeOptions.ToMudTheme();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
         }
         public static void CreateOrUpdateTheme(MudTheme _theme)
         {
