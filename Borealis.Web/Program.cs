@@ -1,6 +1,5 @@
 var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 logger.Info("Init Main...");
-Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\Users\Student\Documents\Projects\Borealis\Borealis.DataManagement\AppFiles\borealis-7c47e-26fc01c5bd43.json");
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
@@ -18,6 +17,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
 builder.Services.Configure<MudTheme>(builder.Configuration.GetSection(nameof(MudTheme)));
+builder.Services.AddDataServices(builder.Configuration);
 builder.WebHost.UseIIS();
 builder.Host.ConfigureLogging(logging =>
 {

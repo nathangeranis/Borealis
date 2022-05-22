@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject ILogger<MainLayout> Logger
-<MudThemeProvider Theme="_theme.Theme" />
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudBreakpointProvider>
@@ -10,6 +10,9 @@
             <MudSpacer />
             <MudText Typo="Typo.h5" Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
             <MudSpacer />
+            <MudToggleIconButton @bind-Toggled="@_isDarkMode" Edge="Edge.End"
+                                 Icon="@Icons.Material.Filled.Brightness7" Color="@Color.Warning" Title="Light Mode"
+                                 ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="@Color.Dark" ToggledTitle="Dark Mode" Variant="Variant.Text" />
         </MudAppBar>
         @*        <MudSwipeArea OnSwipe="@OnSwipe" Style="width:10rem; z-index:50;">
         *@            <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation" ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" MiniWidth="3.25rem">
@@ -18,14 +21,19 @@
         @*        </MudSwipeArea>
         *@        <MudMainContent>
             <MudContainer Fixed="true">
-                @Body
+                <CascadingValue Value="_isDarkMode">
+                    @Body
+                </CascadingValue>
             </MudContainer>
         </MudMainContent>
     </MudLayout>
 </MudBreakpointProvider>
 @code {
+    [Inject]
+    CosmosRepository<ThemeOptions> Repo { get; set; }
     ThemeOptions _theme;
     bool _drawerOpen = false;
+    bool _isDarkMode = false;
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
@@ -47,12 +55,18 @@
     {
         try
         {
-            _theme = await ThemeUtility.LoadTheme();
+            var gOpts = await Global.GetThemeOptions();
+            if (gOpts == null)
+            {
+                _theme = await ThemeUtility.LoadTheme(Repo);
+            }
+            else
+                _theme = gOpts;
         }
         catch (Exception ex)
         {
             Logger.LogError(ex, ex.Message);
         }
-        base.OnInitializedAsync();
+        await base.OnInitializedAsync();
     }
 }

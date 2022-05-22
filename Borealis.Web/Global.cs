@@ -7,10 +7,21 @@ global using Borealis.Web;
 global using Borealis.Web.Utilities;
 global using Borealis.DataManagement;
 global using NLog.Web;
+using Borealis.Web.Utilities.Options.Theme;
 
 namespace Borealis.Web
 {
-    public class Global
+    public static class Global
     {
+        private static ThemeOptions ThemeOptions { get; set; }
+
+        public static async Task<ThemeOptions> GetThemeOptions()
+        {
+            return ThemeOptions;
+        }
+        public static void SetThemeOptions(ThemeOptions _themeOptions)
+        {
+            ThemeOptions = _themeOptions;
+        }
     }
 }

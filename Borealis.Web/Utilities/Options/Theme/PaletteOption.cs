@@ -3,45 +3,45 @@ namespace Borealis.Web.Utilities.Options.Theme
 {
     public class PaletteOption
     {
-        public string Black { get; set; } = "#272c34";
-        public string White { get; set; } = Colors.Shades.White;
-        public string Primary { get; set; } = "#594AE2";
-        public string PrimaryContrastText { get; set; } = Colors.Shades.White;
-        public string Secondary { get; set; } = Colors.Pink.Accent2;
-        public string SecondaryContrastText { get; set; } = Colors.Shades.White;
-        public string Tertiary { get; set; } = "#1EC8A5";
-        public string TertiaryContrastText { get; set; } = Colors.Shades.White;
-        public string Info { get; set; } = Colors.Blue.Default;
-        public string InfoContrastText { get; set; } = Colors.Shades.White;
-        public string Success { get; set; } = Colors.Green.Accent4;
-        public string SuccessContrastText { get; set; } = Colors.Shades.White;
-        public string Warning { get; set; } = Colors.Orange.Default;
-        public string WarningContrastText { get; set; } = Colors.Shades.White;
-        public string Error { get; set; } = Colors.Red.Default;
-        public string ErrorContrastText { get; set; } = Colors.Shades.White;
-        public string Dark { get; set; } = Colors.Grey.Darken3;
-        public string DarkContrastText { get; set; } = Colors.Shades.White;
-        public string TextPrimary { get; set; } = Colors.Grey.Darken3;
-        public string TextSecondary { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.54).ToString(MudColorOutputFormats.HexA);
-        public string TextDisabled { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.38).ToString(MudColorOutputFormats.HexA);
-        public string ActionDefault { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.54).ToString(MudColorOutputFormats.HexA);
-        public string ActionDisabled { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.26).ToString(MudColorOutputFormats.HexA);
-        public string ActionDisabledBackground { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.12).ToString(MudColorOutputFormats.HexA);
-        public string Background { get; set; } = Colors.Shades.White;
-        public string BackgroundGrey { get; set; } = Colors.Grey.Lighten4;
-        public string Surface { get; set; } = Colors.Shades.White;
-        public string DrawerBackground { get; set; } = Colors.Shades.White;
-        public string DrawerText { get; set; } = Colors.Grey.Darken3;
-        public string DrawerIcon { get; set; } = Colors.Grey.Darken2;
-        public string AppbarBackground { get; set; } = "#594AE2";
-        public string AppbarText { get; set; } = Colors.Shades.White;
-        public string LinesDefault { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.12).ToString(MudColorOutputFormats.HexA);
-        public string LinesInputs { get; set; } = Colors.Grey.Lighten1;
-        public string TableLines { get; set; } = new MudColor(Colors.Grey.Lighten2).SetAlpha(1.0).ToString(MudColorOutputFormats.HexA);
-        public string TableStriped { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.02).ToString(MudColorOutputFormats.HexA);
-        public string TableHover { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.04).ToString(MudColorOutputFormats.HexA);
-        public string Divider { get; set; } = Colors.Grey.Lighten2;
-        public string DividerLight { get; set; } = new MudColor(Colors.Shades.Black).SetAlpha(0.8).ToString(MudColorOutputFormats.HexA);
+        public string Black { get; set; }
+        public string White { get; set; }
+        public string Primary { get; set; }
+        public string PrimaryContrastText { get; set; }
+        public string Secondary { get; set; }
+        public string SecondaryContrastText { get; set; }
+        public string Tertiary { get; set; }
+        public string TertiaryContrastText { get; set; }
+        public string Info { get; set; }
+        public string InfoContrastText { get; set; }
+        public string Success { get; set; }
+        public string SuccessContrastText { get; set; }
+        public string Warning { get; set; }
+        public string WarningContrastText { get; set; }
+        public string Error { get; set; }
+        public string ErrorContrastText { get; set; }
+        public string Dark { get; set; }
+        public string DarkContrastText { get; set; }
+        public string TextPrimary { get; set; }
+        public string TextSecondary { get; set; }
+        public string TextDisabled { get; set; }
+        public string ActionDefault { get; set; }
+        public string ActionDisabled { get; set; }
+        public string ActionDisabledBackground { get; set; }
+        public string Background { get; set; }
+        public string BackgroundGrey { get; set; }
+        public string Surface { get; set; }
+        public string DrawerBackground { get; set; }
+        public string DrawerText { get; set; }
+        public string DrawerIcon { get; set; }
+        public string AppbarBackground { get; set; }
+        public string AppbarText { get; set; }
+        public string LinesDefault { get; set; } 
+        public string LinesInputs { get; set; }
+        public string TableLines { get; set; } 
+        public string TableStriped { get; set; }
+        public string TableHover { get; set; }
+        public string Divider { get; set; }
+        public string DividerLight { get; set; }
         internal static PaletteOption ConvertToDarkTheme(PaletteOption palette)
         {
             palette.Primary = "#776be7";

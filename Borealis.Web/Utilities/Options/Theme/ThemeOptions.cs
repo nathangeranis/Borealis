@@ -3,6 +3,8 @@ namespace Borealis.Web.Utilities.Options.Theme
 {
     public partial class ThemeOptions
     {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
         public bool RTL { get; set; }
         public string FontFamily { get; set; }
         public int DefaultBorderRadius { get; set; }
@@ -14,17 +16,5 @@ namespace Borealis.Web.Utilities.Options.Theme
         public PaletteOption PaletteDark { get; set; }
         [JsonIgnore]
         public MudTheme? Theme { get; set; }
-        public ThemeOptions()
-        {
-            RTL = false;
-            FontFamily = "Roboto";
-            DefaultBorderRadius = 8;
-            DefaultElevation = 1;
-            AppBarElevation = 25;
-            DrawerElevation = 2;
-            DrawerClipMode = DrawerClipMode.Always;
-            Palette = new PaletteOption();
-            PaletteDark = PaletteOption.ConvertToDarkTheme(Palette);
-        }
     }
 }

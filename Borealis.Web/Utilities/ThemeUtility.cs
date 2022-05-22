@@ -7,14 +7,15 @@ namespace Borealis.Web.Utilities
         public static JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions() { WriteIndented = true, MaxDepth = 3 };
         public static string filePath = Path.Combine(AppContext.BaseDirectory, @"Config\Theme\Theme.json");
 
-        public static async Task<ThemeOptions> LoadTheme()
+        public static async Task<ThemeOptions> LoadTheme(CosmosRepository<ThemeOptions> Repo)
         {
             try
             {
-                DataManagement.Firebase firebase = new DataManagement.Firebase();
-                var themeOptions = await firebase.CheckDefaultTheme();
-                ThemeOptions opts = themeOptions as ThemeOptions;
-                return opts.ToMudTheme();
+                Repo.Initialize("Resources", "Default");
+                var options = await Repo.GetItemsAsync();
+                Global.SetThemeOptions(options.FirstOrDefault().ToMudTheme());
+
+                return await Global.GetThemeOptions();
             }
             catch (Exception ex)
             {

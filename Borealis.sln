@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Borealis.Web", "Borealis.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Borealis", "Borealis\Borealis.csproj", "{AC94D191-C7BA-4AB0-9805-059003F5539B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borealis.DataManagement", "Borealis.DataManagement\Borealis.DataManagement.csproj", "{41E20449-CC22-4E21-B70F-19ACBC771516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Borealis.DataManagement", "Borealis.DataManagement\Borealis.DataManagement.csproj", "{41E20449-CC22-4E21-B70F-19ACBC771516}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
