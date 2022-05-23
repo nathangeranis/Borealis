@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 namespace Borealis.Web.Utilities.Options.Theme
 {
-    public partial class ThemeOptions
+    public struct ThemeOptions
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

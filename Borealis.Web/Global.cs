@@ -7,6 +7,7 @@ global using Borealis.Web;
 global using Borealis.Web.Utilities;
 global using Borealis.DataManagement;
 global using NLog.Web;
+global using Force.DeepCloner;
 using Borealis.Web.Utilities.Options.Theme;
 
 namespace Borealis.Web

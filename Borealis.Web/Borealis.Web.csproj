@@ -14,6 +14,7 @@
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="CG.Blazor.Wizard" Version="2022.1.4" />
+		<PackageReference Include="DeepCloner" Version="0.10.4" />
 		<PackageReference Include="MudBlazor" Version="6.0.10" />
 		<PackageReference Include="MudBlazor.Extensions" Version="1.2.2" />
 		<PackageReference Include="MudBlazor.Markdown" Version="0.0.10" />

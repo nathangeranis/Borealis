@@ -8,7 +8,7 @@
         <DataAnnotationsValidator />
         <MudText Typo="Typo.h5" Align="@(Align.Center)" Style="padding-top:1rem;">Light Mode</MudText>
         <MudDivider DividerType="DividerType.Middle"></MudDivider>
-        <MudGrid Justify="@(Justify.Center)" Style="margin-top:1rem;" Class="pa-4">
+        <MudGrid Justify="@(Justify.SpaceEvenly)" Style="margin-top:1rem;" Class="pa-4">
             <MudItem xs="3" sm="3" md="3" lg="3">
                 <MudText Typo="Typo.body2" Align="@(Align.Center)">Primary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {primary.ToString(MudColorOutputFormats.HexA)}")">
@@ -17,14 +17,12 @@
             </MudItem>
             <MudItem xs="3" sm="3" md="3" lg="3">
                 <MudText Typo="Typo.body2" Align="@(Align.Center)">Secondary</MudText>
-
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {secondary.ToString(MudColorOutputFormats.HexA)};")">
                     <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {secondaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="3" sm="3" md="3" lg="3">
                 <MudText Typo="Typo.body2" Align="@(Align.Center)">Tertiary</MudText>
-
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {tertiary.ToString(MudColorOutputFormats.HexA)};")">
                     <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {tertiaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
@@ -40,7 +38,7 @@
                 <MudText Typo="Typo.h6" Align="@(Align.Left)" Style="padding-top:1rem;">Primary</MudText>
                 <MudDivider></MudDivider>
                 <MudColorPicker Label="Primary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.Primary)" @bind-Value="@(primary)" />
+                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" Text="@(primary.Value)" @bind-Value="@(primary)" />
                 <MudColorPicker Label="Primary Contrast" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
                                 DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.PrimaryContrastText)" @bind-Value="@(primaryContrast)" />
             </MudItem>
@@ -68,6 +66,10 @@
                 <MudColorPicker Label="Secondary Text Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
                                 DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.PrimaryContrastText)" @bind-Value="@(textSecondary)" />
             </MudItem>
+            <MudItem>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mx-auto">Update</MudButton>
+                <MudButton ButtonType="ButtonType.Button" OnClick="RevertTheme" Variant="Variant.Filled" Color="Color.Transparent" Class="mx-auto">Revert</MudButton>
+            </MudItem>
         </MudGrid>
     </EditForm>
 </MudPaper>
@@ -76,8 +78,10 @@
     bool success;
     [CascadingParameter]
     bool _isDarkMode { get; set; }
-    ThemeOptions newOptionsModel;
-    ThemeOptions existingOptions;
+    [CascadingParameter]
+    Action ReloadTheme { get; set; }
+    ThemeOptions newOptionsModel { get; set; }
+    ThemeOptions existingOptions { get; set; }
     MudColor primary;
     MudColor primaryContrast;
     MudColor secondary;
@@ -91,7 +95,7 @@
     protected override async Task OnInitializedAsync()
     {
         existingOptions = await Global.GetThemeOptions();
-        newOptionsModel = existingOptions;
+        newOptionsModel = existingOptions.DeepClone();
         context = new EditContext(newOptionsModel);
         SetupColors();
     }
@@ -108,11 +112,25 @@
     }
     private void OnValidSubmit(EditContext context)
     {
-        success = true;
+        newOptionsModel.Theme!.Palette.Primary = primary;
+        newOptionsModel.Theme!.Palette.PrimaryContrastText = primaryContrast;
+        newOptionsModel.Theme!.Palette.Secondary = secondary;
+        newOptionsModel.Theme!.Palette.SecondaryContrastText = secondaryContrast;
+        newOptionsModel.Theme!.Palette.Tertiary = tertiary;
+        newOptionsModel.Theme!.Palette.TertiaryContrastText = tertiaryContrast;
+        newOptionsModel.Theme!.Palette.TextPrimary = textPrimary;
+        newOptionsModel.Theme!.Palette.TextSecondary = textSecondary;
+        Global.SetThemeOptions(newOptionsModel);
+        ReloadTheme.Invoke();
         StateHasChanged();
     }
-    private void UpdatePrimaryColor()
+    private void RevertTheme()
     {
-
+        newOptionsModel = existingOptions.DeepClone();
+        context = new EditContext(newOptionsModel);
+        Global.SetThemeOptions(existingOptions);
+        SetupColors();
+        ReloadTheme.Invoke();
+        StateHasChanged();
     }
 }

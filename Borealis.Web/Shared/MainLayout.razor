@@ -12,7 +12,7 @@
             <MudSpacer />
             <MudToggleIconButton @bind-Toggled="@_isDarkMode" Edge="Edge.End"
                                  Icon="@Icons.Material.Filled.Brightness7" Color="@Color.Warning" Title="Light Mode"
-                                 ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="@Color.Dark" ToggledTitle="Dark Mode" Variant="Variant.Text" />
+                                 ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="@Color.Surface" ToggledTitle="Dark Mode" Variant="Variant.Text" />
         </MudAppBar>
         @*        <MudSwipeArea OnSwipe="@OnSwipe" Style="width:10rem; z-index:50;">
         *@            <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation" ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" MiniWidth="3.25rem">
@@ -21,9 +21,12 @@
         @*        </MudSwipeArea>
         *@        <MudMainContent>
             <MudContainer Fixed="true">
-                <CascadingValue Value="_isDarkMode">
-                    @Body
+                <CascadingValue Value="ReloadTheme">
+                    <CascadingValue Value="_isDarkMode">
+                        @Body
+                    </CascadingValue>
                 </CascadingValue>
+
             </MudContainer>
         </MudMainContent>
     </MudLayout>
@@ -56,7 +59,7 @@
         try
         {
             var gOpts = await Global.GetThemeOptions();
-            if (gOpts == null)
+            if (gOpts.Theme == null)
             {
                 _theme = await ThemeUtility.LoadTheme(Repo);
             }
@@ -68,5 +71,10 @@
             Logger.LogError(ex, ex.Message);
         }
         await base.OnInitializedAsync();
+    }
+    public async void ReloadTheme()
+    {
+        _theme = await Global.GetThemeOptions();
+        StateHasChanged();
     }
 }

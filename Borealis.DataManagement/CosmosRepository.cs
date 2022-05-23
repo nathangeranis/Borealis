@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.Cosmos.Linq;
 namespace Borealis.DataManagement
 {
-    public class CosmosRepository<T> where T : class
+    public class CosmosRepository<T> where T : struct
     {
         private static string DatabaseId;
         private static string ContainerId;
@@ -26,7 +26,7 @@ namespace Borealis.DataManagement
             catch (CosmosException e)
             {
                 if (e.StatusCode == System.Net.HttpStatusCode.NotFound)
-                    return null;
+                    return default(T);
                 else
                 {
                     throw;

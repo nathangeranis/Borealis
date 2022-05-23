@@ -33,7 +33,7 @@ namespace Borealis.Web.Utilities
                 {
                     string json = File.ReadAllText(filePath);
                     ThemeOptions theme = JsonSerializer.Deserialize<ThemeOptions>(json);
-                    if (theme == null)
+                    if ((object)theme == null)
                         CreateTheme(JsonSerializer.Serialize(_theme.ToThemeOptionsFromMudTheme(), JsonSerializerOptions));
                     else
                         UpdateTheme(theme, _theme);
