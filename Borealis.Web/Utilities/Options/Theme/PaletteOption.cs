@@ -42,35 +42,5 @@ namespace Borealis.Web.Utilities.Options.Theme
         public string TableHover { get; set; }
         public string Divider { get; set; }
         public string DividerLight { get; set; }
-        internal static PaletteOption ConvertToDarkTheme(PaletteOption palette)
-        {
-            palette.Primary = "#776be7";
-            palette.Black = "#27272f";
-            palette.Background = "#32333d";
-            palette.BackgroundGrey = "#27272f";
-            palette.Surface = "#373740";
-            palette.DrawerBackground = "#27272f";
-            palette.DrawerText = new MudColor("rgba(255,255,255, 0.50)").ToString(MudColorOutputFormats.HexA);
-            palette.DrawerIcon = new MudColor("rgba(255,255,255, 0.50)").ToString(MudColorOutputFormats.HexA);
-            palette.AppbarBackground = "#27272f";
-            palette.AppbarText = new MudColor("rgba(255,255,255, 0.70)").ToString(MudColorOutputFormats.HexA);
-            palette.TextPrimary = new MudColor("rgba(255,255,255, 0.70)").ToString(MudColorOutputFormats.HexA);
-            palette.TextSecondary = new MudColor("rgba(255,255,255, 0.50)").ToString(MudColorOutputFormats.HexA);
-            palette.ActionDefault = "#adadb1";
-            palette.ActionDisabled = new MudColor("rgba(255,255,255, 0.26)").ToString(MudColorOutputFormats.HexA);
-            palette.ActionDisabledBackground = new MudColor("rgba(255,255,255, 0.12)").ToString(MudColorOutputFormats.HexA);
-            palette.Divider = new MudColor("rgba(255,255,255, 0.12)").ToString(MudColorOutputFormats.HexA);
-            palette.DividerLight = new MudColor("rgba(255,255,255, 0.06)").ToString(MudColorOutputFormats.HexA);
-            palette.TableLines = new MudColor("rgba(255,255,255, 0.12)").ToString(MudColorOutputFormats.HexA);
-            palette.LinesDefault = new MudColor("rgba(255,255,255, 0.12)").ToString(MudColorOutputFormats.HexA);
-            palette.LinesInputs = new MudColor("rgba(255,255,255, 0.3)").ToString(MudColorOutputFormats.HexA);
-            palette.TextDisabled = new MudColor("rgba(255,255,255, 0.2)").ToString(MudColorOutputFormats.HexA);
-            palette.Info = "#3299ff";
-            palette.Success = "#0bba83";
-            palette.Warning = "#ffa800";
-            palette.Error = "#f64e62";
-            palette.Dark = "#27272f";
-            return palette;
-        }
     }
 }

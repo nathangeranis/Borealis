@@ -2,40 +2,39 @@
 <MudText Typo="Typo.h4" Align="@(Align.Left)" Style="padding-top:1rem;">Characters</MudText>
 <MudDivider></MudDivider>
 <MudGrid Spacing="3" Style="margin-top:0.5rem;">
-    @for (var i = 0; i < 8; i++)
-    {
-        <MudItem xs="10" sm="4" md="3" lg="2">
-            <MudCard Style="background-color:whitesmoke;" Elevation="5">
-                <MudCardMedia Image="/images/silhouette-head.png" Style="height:12.5rem; background-size:contain; position:relative; top:0.5rem;"/>
-                <MudDivider DividerType="@(DividerType.Middle)" Style="background-color:black;"></MudDivider>
-                <MudCardContent Style="padding-bottom:0; padding-top:0;">
-                    <MudText Typo="Typo.h6">Character Name</MudText>
-                    <MudText Typo="Typo.body2">Level</MudText>
-                    <MudText Typo="Typo.body2">Race</MudText>
-                    <MudText Typo="Typo.body2">Class</MudText>
-                    <MudDivider></MudDivider>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudStack Row="true" AlignItems="@(AlignItems.Stretch)" Justify="@(Justify.SpaceAround)" Style="width:100%;">
-                        <MudHidden Breakpoint="@(Breakpoint.LgAndUp)" Invert="true">
-                            <MudIconButton ButtonType="@(ButtonType.Button)" Title="Character Sheet" Color="Color.Primary"
-                                       Icon="@(Icons.Material.Filled.ContactPage)" Variant="@(Variant.Text)" Size="@(Size.Large)" Style="border:1px solid lightgray;"/>
-                            <MudIconButton ButtonType="@(ButtonType.Button)" Title="Info" Color="Color.Info"
-                                       Icon="@(Icons.Material.Filled.Info)" Variant="@(Variant.Text)" Size="@(Size.Large)" Style="border:1px solid lightgray;"/>
-                            <MudIconButton ButtonType="@(ButtonType.Button)" Title="Delete" Color="Color.Warning"
-                                       Icon="@(Icons.Material.Filled.DeleteForever)" Variant="@(Variant.Text)" Size="@(Size.Large)" Style="border:1px solid lightgray;"/>
-                        </MudHidden>
-                        <MudHidden Breakpoint="@(Breakpoint.MdAndDown)" Invert="true">
-                            <MudIconButton ButtonType="@(ButtonType.Button)" Title="Character Sheet" Color="Color.Primary"
-                                       Icon="@(Icons.Material.Filled.ContactPage)" Variant="@(Variant.Filled)" Size="@(Size.Small)" DisableElevation="true" />
-                            <MudIconButton ButtonType="@(ButtonType.Button)" Title="Info" Color="Color.Info"
-                                       Icon="@(Icons.Material.Filled.Info)" Variant="@(Variant.Filled)" Size="@(Size.Small)" DisableElevation="true" />
-                            <MudIconButton ButtonType="@(ButtonType.Button)" Title="Delete" Color="Color.Warning"
-                                       Icon="@(Icons.Material.Filled.DeleteForever)" Variant="@(Variant.Filled)" Size="@(Size.Small)" DisableElevation="true" />
-                        </MudHidden>
-                    </MudStack>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-    }
+    <MudItem xs="12" sm="12" md="12" lg="12">
+        <MudCarousel Class="mud-width-full" Style="height:28rem;" ShowArrows="false" ShowBullets="true" AutoCycle="false" TData="object">
+            @for (int i = 0; i < 10; i++)
+            {
+                <MudHidden Invert="true" Breakpoint="Breakpoint.LgAndUp">
+                    @{
+                        int x = i % 3;
+                        if (x == 0)
+                        {
+                            <MudCarouselItem Transition="Transition.Slide" Color="@Color.Surface">
+                                <div class="d-flex" style="height:85%; justify-content:space-evenly;">
+                                    <CharacterCard></CharacterCard>
+                                    <CharacterCard></CharacterCard>
+                                    <CharacterCard></CharacterCard>
+                                </div>
+                            </MudCarouselItem>
+                        }
+                    }
+                </MudHidden>
+                <MudHidden Invert="true" Breakpoint="Breakpoint.MdAndDown">
+                    @{
+                        int x = i % 1;
+                        if (x == 0)
+                        {
+                            <MudCarouselItem Transition="Transition.Slide" Color="@Color.Surface">
+                                <div class="d-flex" style="height:85%; justify-content:space-evenly;">
+                                    <CharacterCard></CharacterCard>
+                                </div>
+                            </MudCarouselItem>
+                        }
+                    }
+                </MudHidden>
+            }
+        </MudCarousel>
+    </MudItem>
 </MudGrid>

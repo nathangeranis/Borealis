@@ -6,32 +6,32 @@
     <MudDivider></MudDivider>
     <EditForm EditContext="@(context)" OnValidSubmit="@(OnValidSubmit)">
         <DataAnnotationsValidator />
-        <MudText Typo="Typo.h5" Align="@(Align.Center)" Style="padding-top:1rem;">Light Mode</MudText>
+        <MudText Typo="Typo.h5" Align="@(Align.Center)" Style="padding-top:1rem;">Palette</MudText>
         <MudDivider DividerType="DividerType.Middle"></MudDivider>
         <MudGrid Justify="@(Justify.SpaceEvenly)" Style="margin-top:1rem;" Class="pa-4">
-            <MudItem xs="3" sm="3" md="3" lg="3">
-                <MudText Typo="Typo.body2" Align="@(Align.Center)">Primary</MudText>
+            <MudItem xs="6" sm="3" md="3" lg="3">
+                <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Primary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {primary.ToString(MudColorOutputFormats.HexA)}")">
-                    <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {primaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
+                    <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {primaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="3" sm="3" md="3" lg="3">
-                <MudText Typo="Typo.body2" Align="@(Align.Center)">Secondary</MudText>
+            <MudItem xs="6" sm="3" md="3" lg="3">
+                <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Secondary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {secondary.ToString(MudColorOutputFormats.HexA)};")">
-                    <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {secondaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
+                    <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {secondaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="3" sm="3" md="3" lg="3">
-                <MudText Typo="Typo.body2" Align="@(Align.Center)">Tertiary</MudText>
+            <MudItem xs="6" sm="3" md="3" lg="3">
+                <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Tertiary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {tertiary.ToString(MudColorOutputFormats.HexA)};")">
-                    <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {tertiaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
+                    <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {tertiaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="3" sm="3" md="3" lg="3">
-                <MudText Typo="Typo.body2" Align="@(Align.Center)">Text</MudText>
+            <MudItem xs="6" sm="3" md="3" lg="3">
+                <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Text</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {Color.Surface};")">
-                    <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {textPrimary.ToString(MudColorOutputFormats.HexA)}")">Primary Text</MudText>
-                    <MudText Typo="Typo.subtitle1" Align="@(Align.Center)" Style="@($"color: {textSecondary.ToString(MudColorOutputFormats.HexA)}")">Secondary Text</MudText>
+                    <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {textPrimary.ToString(MudColorOutputFormats.HexA)}")">Primary Text</MudText>
+                    <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {textSecondary.ToString(MudColorOutputFormats.HexA)}")">Secondary Text</MudText>
                 </MudPaper>
             </MudItem>
             <MudItem xs="12" sm="6" md="6">
@@ -68,7 +68,7 @@
             </MudItem>
             <MudItem>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mx-auto">Update</MudButton>
-                <MudButton ButtonType="ButtonType.Button" OnClick="RevertTheme" Variant="Variant.Filled" Color="Color.Transparent" Class="mx-auto">Revert</MudButton>
+                <MudButton ButtonType="ButtonType.Button" OnClick="RevertTheme" Variant="Variant.Filled" Color="Color.Dark" Class="mx-auto">Revert</MudButton>
             </MudItem>
         </MudGrid>
     </EditForm>
@@ -76,8 +76,6 @@
 
 @code {
     bool success;
-    [CascadingParameter]
-    bool _isDarkMode { get; set; }
     [CascadingParameter]
     Action ReloadTheme { get; set; }
     ThemeOptions newOptionsModel { get; set; }
@@ -112,6 +110,14 @@
     }
     private void OnValidSubmit(EditContext context)
     {
+        SetLightPalette();
+        SetDarkPalette();
+        Global.SetThemeOptions(newOptionsModel);
+        ReloadTheme.Invoke();
+        StateHasChanged();
+    }
+    private void SetLightPalette()
+    {
         newOptionsModel.Theme!.Palette.Primary = primary;
         newOptionsModel.Theme!.Palette.PrimaryContrastText = primaryContrast;
         newOptionsModel.Theme!.Palette.Secondary = secondary;
@@ -120,9 +126,17 @@
         newOptionsModel.Theme!.Palette.TertiaryContrastText = tertiaryContrast;
         newOptionsModel.Theme!.Palette.TextPrimary = textPrimary;
         newOptionsModel.Theme!.Palette.TextSecondary = textSecondary;
-        Global.SetThemeOptions(newOptionsModel);
-        ReloadTheme.Invoke();
-        StateHasChanged();
+    }
+    private void SetDarkPalette()
+    {
+        newOptionsModel.Theme!.PaletteDark.Primary = primary.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.PrimaryContrastText = primaryContrast.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.Secondary = secondary.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.SecondaryContrastText = secondaryContrast.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.Tertiary = tertiary.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.TertiaryContrastText = tertiaryContrast.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.TextPrimary = textPrimary.ColorDarken(15);
+        newOptionsModel.Theme!.PaletteDark.TextSecondary = textSecondary.ColorDarken(15);
     }
     private void RevertTheme()
     {

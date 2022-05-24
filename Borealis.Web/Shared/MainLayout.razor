@@ -1,16 +1,18 @@
 ﻿@inherits LayoutComponentBase
 @inject ILogger<MainLayout> Logger
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme.Theme" />
+<MudThemeProvider @bind-IsDarkMode="@Global.IsDarkMode" Theme="_theme.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudBreakpointProvider>
+<MudBreakpointProvider @ref="@BreakpointProvider">
     <MudLayout>
         <MudAppBar Color="Color.Primary" Dense="true" Elevation="2">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
             <MudSpacer />
             <MudText Typo="Typo.h5" Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
             <MudSpacer />
-            <MudToggleIconButton @bind-Toggled="@_isDarkMode" Edge="Edge.End"
+            <MudText Typo="Typo.caption" Align="Align.End" Inline="true" Color="Color.Surface" Class="white-header-text">@(BreakpointProvider.Breakpoint.ToString())</MudText>
+            <MudSpacer />
+            <MudToggleIconButton ToggledChanged="SetDarkMode" Edge="Edge.End"
                                  Icon="@Icons.Material.Filled.Brightness7" Color="@Color.Warning" Title="Light Mode"
                                  ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="@Color.Surface" ToggledTitle="Dark Mode" Variant="Variant.Text" />
         </MudAppBar>
@@ -22,11 +24,8 @@
         *@        <MudMainContent>
             <MudContainer Fixed="true">
                 <CascadingValue Value="ReloadTheme">
-                    <CascadingValue Value="_isDarkMode">
-                        @Body
-                    </CascadingValue>
+                    @Body
                 </CascadingValue>
-
             </MudContainer>
         </MudMainContent>
     </MudLayout>
@@ -34,9 +33,9 @@
 @code {
     [Inject]
     CosmosRepository<ThemeOptions> Repo { get; set; }
+    MudBreakpointProvider BreakpointProvider;
     ThemeOptions _theme;
     bool _drawerOpen = false;
-    bool _isDarkMode = false;
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
@@ -75,6 +74,11 @@
     public async void ReloadTheme()
     {
         _theme = await Global.GetThemeOptions();
+        StateHasChanged();
+    }
+    public async void SetDarkMode()
+    {
+        Global.IsDarkMode = !Global.IsDarkMode;
         StateHasChanged();
     }
 }

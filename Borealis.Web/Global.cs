@@ -15,7 +15,7 @@ namespace Borealis.Web
     public static class Global
     {
         private static ThemeOptions ThemeOptions { get; set; }
-
+        public static bool IsDarkMode { get; set; } = false;
         public static async Task<ThemeOptions> GetThemeOptions()
         {
             return ThemeOptions;
