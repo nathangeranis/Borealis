@@ -9,62 +9,41 @@
         <MudText Typo="Typo.h5" Align="@(Align.Center)" Style="padding-top:1rem;">Palette</MudText>
         <MudDivider DividerType="DividerType.Middle"></MudDivider>
         <MudGrid Justify="@(Justify.SpaceEvenly)" Style="margin-top:1rem;" Class="pa-4">
-            <MudItem xs="6" sm="3" md="3" lg="3">
+            <MudItem xs="9" sm="4" md="4" lg="4">
                 <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Primary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {primary.ToString(MudColorOutputFormats.HexA)}; text-align:center;")">
                     <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {primaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="6" sm="3" md="3" lg="3">
+            <MudItem xs="9" sm="4" md="4" lg="4">
                 <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Secondary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {secondary.ToString(MudColorOutputFormats.HexA)}; text-align:center;")">
                     <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {secondaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="6" sm="3" md="3" lg="3">
+            <MudItem xs="9" sm="3" md="3" lg="4">
                 <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Tertiary</MudText>
                 <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {tertiary.ToString(MudColorOutputFormats.HexA)}; text-align:center;")">
                     <MudText Typo="Typo.caption" Align="@(Align.Center)" Style="@($"color: {tertiaryContrast.ToString(MudColorOutputFormats.HexA)}")">Contrast Text</MudText>
                 </MudPaper>
             </MudItem>
-            <MudItem xs="6" sm="3" md="3" lg="3">
-                <MudText Typo="Typo.subtitle2" Align="@(Align.Center)">Text</MudText>
-                <MudPaper Class="pa-4" Elevation="5" Style="@($"background-color: {Color.Surface};")">
-                    <MudText Typo="Typo.body2" Align="@(Align.Center)" Style="@($"color: {textPrimary.ToString(MudColorOutputFormats.HexA)} text-align:center;")">Primary Text</MudText>
-                    <MudText Typo="Typo.body2" Align="@(Align.Center)" Style="@($"color: {textSecondary.ToString(MudColorOutputFormats.HexA)} text-align:center;")">Secondary Text</MudText>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="12" sm="6" md="6">
+            <MudItem xs="12" sm="4" md="4">
                 <MudText Typo="Typo.h6" Align="@(Align.Left)" Style="padding-top:1rem;">Primary</MudText>
                 <MudDivider></MudDivider>
-                <MudColorPicker Label="Primary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" Text="@(primary.Value)" @bind-Value="@(primary)" />
-                <MudColorPicker Label="Primary Contrast" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.PrimaryContrastText)" @bind-Value="@(primaryContrast)" />
+                <MudColorPicker @ref="primaryPicker" Label="Primary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
+                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" Text="@(primary.Value)" @bind-Value="@(primary)" TextChanged="UpdatePrimaryColorContrast" />
             </MudItem>
-            <MudItem xs="12" sm="6" md="6">
+            <MudItem xs="12" sm="4" md="4">
                 <MudText Typo="Typo.h6" Align="@(Align.Left)" Style="padding-top:1rem;">Secondary</MudText>
                 <MudDivider></MudDivider>
-                <MudColorPicker Label="Secondary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.Secondary)" @bind-Value="@(secondary)" />
-                <MudColorPicker Label="Secondary Contrast" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.SecondaryContrastText)" @bind-Value="@(secondaryContrast)" />
+                <MudColorPicker @ref="secondaryPicker" Label="Secondary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
+                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" Text="@(secondary.Value)" @bind-Value="@(secondary)" TextChanged="UpdateSecondaryColorContrast" />
             </MudItem>
-            <MudItem xs="12" sm="6" md="6">
+            <MudItem xs="12" sm="4" md="4">
                 <MudText Typo="Typo.h6" Align="@(Align.Left)" Style="padding-top:1rem;">Tertiary</MudText>
                 <MudDivider></MudDivider>
-                <MudColorPicker Label="Tertiary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.Tertiary)" @bind-Value="@(tertiary)" />
-                <MudColorPicker Label="Tertiary Contrast" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.PrimaryContrastText)" @bind-Value="@(tertiaryContrast)" />
-            </MudItem>
-            <MudItem xs="12" sm="6" md="6">
-                <MudText Typo="Typo.h6" Align="@(Align.Left)" Style="padding-top:1rem;">Text Colors</MudText>
-                <MudDivider></MudDivider>
-                <MudColorPicker Label="Primary Text Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.Primary)" @bind-Value="@(textPrimary)" />
-                <MudColorPicker Label="Secondary Text Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
-                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" @bind-Text="@(newOptionsModel.Palette.PrimaryContrastText)" @bind-Value="@(textSecondary)" />
+                <MudColorPicker @ref="tertiaryPicker" Label="Tertiary Color" ColorPickerView="ColorPickerView.Grid" PickerVariant="PickerVariant.Inline"
+                                DisableModeSwitch="true" ColorPickerMode="@(ColorPickerMode.HEX)" Text="@(tertiary.Value)" @bind-Value="@(tertiary)" TextChanged="UpdateTertiaryColorContrast" />
             </MudItem>
             <MudItem>
                 <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mx-auto">Update</MudButton>
@@ -81,10 +60,13 @@
     ThemeOptions newOptionsModel { get; set; }
     ThemeOptions existingOptions { get; set; }
     MudColor primary;
+    MudColorPicker primaryPicker { get; set; }
     MudColor primaryContrast;
     MudColor secondary;
+    MudColorPicker secondaryPicker { get; set; }
     MudColor secondaryContrast;
     MudColor tertiary;
+    MudColorPicker tertiaryPicker { get; set; }
     MudColor tertiaryContrast;
     MudColor textPrimary;
     MudColor textSecondary;
@@ -92,10 +74,18 @@
     private EditContext context;
     protected override async Task OnInitializedAsync()
     {
+        SetupPickers();
         existingOptions = await Global.GetThemeOptions();
         newOptionsModel = existingOptions.DeepClone();
         context = new EditContext(newOptionsModel);
         SetupColors();
+    }
+    private void SetupPickers()
+    {
+        primaryPicker = new MudColorPicker();
+        secondaryPicker = new MudColorPicker();
+        tertiaryPicker = new MudColorPicker();
+
     }
     private void SetupColors()
     {
@@ -130,11 +120,8 @@
     private void SetDarkPalette()
     {
         newOptionsModel.Theme!.PaletteDark.Primary = primary.ColorDarken(15);
-        newOptionsModel.Theme!.PaletteDark.PrimaryContrastText = primaryContrast.ColorDarken(15);
         newOptionsModel.Theme!.PaletteDark.Secondary = secondary.ColorDarken(15);
-        newOptionsModel.Theme!.PaletteDark.SecondaryContrastText = secondaryContrast.ColorDarken(15);
         newOptionsModel.Theme!.PaletteDark.Tertiary = tertiary.ColorDarken(15);
-        newOptionsModel.Theme!.PaletteDark.TertiaryContrastText = tertiaryContrast.ColorDarken(15);
         newOptionsModel.Theme!.PaletteDark.TextPrimary = textPrimary.ColorDarken(15);
         newOptionsModel.Theme!.PaletteDark.TextSecondary = textSecondary.ColorDarken(15);
     }
@@ -146,5 +133,36 @@
         SetupColors();
         ReloadTheme.Invoke();
         StateHasChanged();
+    }
+    private void UpdatePrimaryColorContrast()
+    {
+        primary = primaryPicker.Value;
+        primaryContrast = DetermineLightOrDark(primary.R, primary.G, primary.B);
+        StateHasChanged();
+    }
+    private void UpdateSecondaryColorContrast()
+    {
+        secondary = secondaryPicker.Value;
+        secondaryContrast = DetermineLightOrDark(secondary.R, secondary.G, secondary.B);
+        StateHasChanged();
+    }
+    private void UpdateTertiaryColorContrast()
+    {
+        tertiary = tertiaryPicker.Value;
+        tertiaryContrast = DetermineLightOrDark(tertiary.R, tertiary.G, tertiary.B);
+        StateHasChanged();
+    }
+
+    private MudColor DetermineLightOrDark(int r, int g, int b)
+    {
+        var val = Math.Sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+        if (val > 127.5)
+        {
+            return new MudColor("#000000ff");
+        }
+        else
+        {
+            return new MudColor("#ffffffff");
+        }
     }
 }
