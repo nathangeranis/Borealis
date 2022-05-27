@@ -1,40 +1,34 @@
 ﻿@page "/"
 <MudText Typo="Typo.h4" Align="@(Align.Left)" Style="padding-top:1rem;">Characters</MudText>
 <MudDivider></MudDivider>
-<MudGrid Spacing="3" Style="margin-top:0.5rem;">
-    <MudItem xs="12" sm="12" md="12" lg="12">
-        <MudCarousel Class="mud-width-full" Style="height:28rem;" ShowArrows="false" ShowBullets="true" AutoCycle="false" TData="object">
-            @for (int i = 0; i < 10; i++)
-            {
+<MudBreakpointProvider>
+    <MudGrid Spacing="3" Style="margin-top:0.5rem;">
+        <MudItem xs="12" sm="12" md="12" lg="12">
+            <MudCarousel Class="mud-width-full" Style="height:30rem;" ShowArrows="false" ShowBullets="true" AutoCycle="false" TData="object">
                 <MudHidden Invert="true" Breakpoint="Breakpoint.LgAndUp">
-                    @{
-                        int x = i % 3;
-                        if (x == 0)
-                        {
-                            <MudCarouselItem Transition="Transition.Slide" Color="@Color.Surface">
-                                <div class="d-flex" style="height:85%; justify-content:space-evenly;">
-                                    <CharacterCard></CharacterCard>
-                                    <CharacterCard></CharacterCard>
-                                    <CharacterCard></CharacterCard>
-                                </div>
-                            </MudCarouselItem>
-                        }
-                    }
+                    <MudCarouselItem Transition="Transition.Slide" Color="@Color.Surface">
+                        <div class="d-flex" style="height:88%; justify-content:space-evenly;">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <CharacterCard></CharacterCard>
+                            }
+                        </div>
+                    </MudCarouselItem>
                 </MudHidden>
                 <MudHidden Invert="true" Breakpoint="Breakpoint.MdAndDown">
-                    @{
-                        int x = i % 1;
-                        if (x == 0)
-                        {
-                            <MudCarouselItem Transition="Transition.Slide" Color="@Color.Surface">
-                                <div class="d-flex" style="height:85%; justify-content:space-evenly;">
-                                    <CharacterCard></CharacterCard>
-                                </div>
-                            </MudCarouselItem>
-                        }
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <MudCarouselItem Transition="Transition.Slide" Color="@Color.Surface">
+                            <div class="d-flex" style="height:85%; justify-content:space-evenly;">
+                                <CharacterCard></CharacterCard>
+                            </div>
+                        </MudCarouselItem>
                     }
                 </MudHidden>
-            }
-        </MudCarousel>
-    </MudItem>
-</MudGrid>
+            </MudCarousel>
+        </MudItem>
+    </MudGrid>
+</MudBreakpointProvider>
+@code
+{
+}

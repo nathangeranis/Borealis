@@ -1,7 +1,43 @@
+:root {
+    --mud-drawer-width-left: 11rem !important;
+    --mud-drawer-width-right: 11rem !important;
+    --mud-typography-default-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-h1-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-h2-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-h3-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-h4-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-h5-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-h6-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-subtitle1-family: 'AileronSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-subtitle2-family: 'AileronSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-body1-family: 'AileronSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-body2-family: 'AileronSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-button-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+    /*    --mud-typography-button-text-transform: uppercase;
+*/ --mud-typography-caption-family: 'AileronSemiBold','Helvetica','Arial','sans-serif' !important;
+    --mud-typography-overline-family: 'KanitSemiBold','Helvetica','Arial','sans-serif' !important;
+}
+body {
+    font-family: 'AileronBlack' !important;
+}
 .white-header-text {
     color: #f6f8f1ff !important;
 }
-
+.navMenuContainer {
+    height:93vh;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+}
+.groupUp.mud-nav-group{
+    display:inline-block;
+    position:relative;
+}
+.groupUp.mud-nav-group .mud-collapse-container{
+    position:absolute;
+    bottom:3rem;
+}
 @media (min-width: 600px) {
     .mud-toolbar-gutters {
         padding-left:1.005rem;
@@ -12,4 +48,52 @@
         width:100%;
         margin-left:0;
     }
+}
+@font-face {
+    font-family: 'AileronBlack';
+    src: url('../fonts/Aileron/Aileron-Black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'AileronBold';
+    src: url('../fonts/Aileron/Aileron-Bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'AileronRegular';
+    src: url('../fonts/Aileron/Aileron-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'AileronSemiBold';
+    src: url('../fonts/Aileron/Aileron-SemiBold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KanitBlack';
+    src: url('../fonts/Kanit/kanit-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KanitBold';
+    src: url('../fonts/Kanit/kanit-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KanitSemiBold';
+    src: url('../fonts/Kanit/kanit-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KanitRegular';
+    src: url('../fonts/Kanit/kanit-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }

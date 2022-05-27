@@ -3,37 +3,33 @@
 <MudThemeProvider @bind-IsDarkMode="@Global.IsDarkMode" Theme="_theme.Theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudBreakpointProvider @ref="@BreakpointProvider">
-    <MudLayout>
-        <MudAppBar Color="Color.Primary" Dense="true" Elevation="2">
-            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
-            <MudSpacer />
-            <MudText Typo="Typo.h5" Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
-            <MudSpacer />
-            <MudText Typo="Typo.caption" Align="Align.End" Inline="true" Color="Color.Surface" Class="white-header-text">@(BreakpointProvider.Breakpoint.ToString())</MudText>
-            <MudSpacer />
-            <MudToggleIconButton ToggledChanged="SetDarkMode" Edge="Edge.End"
-                                 Icon="@Icons.Material.Filled.Brightness7" Color="@Color.Warning" Title="Light Mode"
-                                 ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="@Color.Surface" ToggledTitle="Dark Mode" Variant="Variant.Text" />
-        </MudAppBar>
-        @*        <MudSwipeArea OnSwipe="@OnSwipe" Style="width:10rem; z-index:50;">
-        *@            <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation" ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" MiniWidth="3.25rem">
+<MudLayout>
+    <MudAppBar Color="Color.Primary" Dense="true" Elevation="2">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="DrawerToggle" />
+        <MudSpacer />
+        <MudText Typo="Typo.h5" Align="Align.Center" Inline="true" Color="Color.Surface" Class="white-header-text">Borealis</MudText>
+        <MudSpacer />
+        @*<MudText Typo="Typo.caption" Align="Align.End" Inline="true" Color="Color.Surface" Class="white-header-text">@(BreakpointProvider.Breakpoint.ToString())</MudText>*@
+        <MudToggleIconButton ToggledChanged="SetDarkMode" Edge="Edge.End"
+                             Icon="@Icons.Material.Filled.Brightness7" Color="@Color.Warning" Title="Light Mode"
+                             ToggledIcon="@Icons.Material.Filled.Bedtime" ToggledColor="@Color.Surface" ToggledTitle="Dark Mode" Variant="Variant.Text" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="_theme.DrawerElevation" ClipMode="_theme.DrawerClipMode" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true" MiniWidth="3.25rem" Style="overflow-x: clip;">
+        <MudSwipeArea OnSwipe="@OnSwipe" Style="width:11rem;">
             <NavMenu></NavMenu>
-        </MudDrawer>
-        @*        </MudSwipeArea>
-        *@        <MudMainContent>
-            <MudContainer Fixed="true">
-                <CascadingValue Value="ReloadTheme">
-                    @Body
-                </CascadingValue>
-            </MudContainer>
-        </MudMainContent>
-    </MudLayout>
-</MudBreakpointProvider>
+        </MudSwipeArea>
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer Fixed="true">
+            <CascadingValue Value="ReloadTheme">
+                @Body
+            </CascadingValue>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
 @code {
     [Inject]
     CosmosRepository<ThemeOptions> Repo { get; set; }
-    MudBreakpointProvider BreakpointProvider;
     ThemeOptions _theme;
     bool _drawerOpen = false;
     void DrawerToggle()
